@@ -7,8 +7,11 @@ public static class JobsEndpoint
 {
     public static void ConfigureJobsEndpoint(this WebApplication app)
     {
-        app.MapGet("/Jobs", GetJobs);
-        app.MapGet("/Jobs/GetById/{id:int}", GetJobById);
+        // app.MapGet("/Jobs", GetJobs);
+        app.MapGet("/Jobs", GetJobs)
+            .Produces<IEnumerable<JobModel>>();
+        app.MapGet("/Jobs/GetById/{id:int}", GetJobById)
+            .Produces<JobModel>();
         app.MapPost("/Jobs/Insert", InsertJob);
         app.MapPut("/Jobs/Archive/{id:int}", ArchiveJob);
         app.MapPut("/Jobs", UpdateJob);
