@@ -3,14 +3,6 @@
 public class UserModel
 {
     public int Id { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
-    public string EmailAddress { get; set; }
-    public string GivenName { get; set; }
-    public string Surname { get; set; }
-    public string Role { get; set; }
-
-    // new Claim(ClaimTypes.GivenName, loggedInUser.GivenName),
-    // new Claim(ClaimTypes.Surname, loggedInUser.Surname),
-    // new Claim(ClaimTypes.Role, loggedInUser.Role)
+    public string Username { get; set; } = "";
+    public string Email { get; set; } = "";
 }
