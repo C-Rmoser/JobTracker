@@ -23,9 +23,9 @@ public class JobData : IJobData
         return results.FirstOrDefault();
     }
 
-    public Task InsertJob(JobModel job)
+    public async Task<int> InsertJob(JobModel job)
     {
-        return _db.SaveData("spJobs_Insert",
+        return await _db.SaveData("spJobs_Insert",
             new
             {
                 job.Title, job.Location, job.LinkToDetails,
@@ -33,9 +33,11 @@ public class JobData : IJobData
             });
     }
 
-    public Task ArchiveJob(int id) =>
-        _db.SaveData("spJobs_Archive", new {Id = id});
+    public async Task<int> ArchiveJob(int id)
+    {
+        return await _db.SaveData("spJobs_Archive", new {Id = id});
+    }
 
-    public Task UpdateJob(JobModel job) =>
-        _db.SaveData("spJobs_Update", job);
+    public async Task<int> UpdateJob(JobModel job) =>
+        await _db.SaveData("spJobs_Update", job);
 }

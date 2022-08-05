@@ -3,21 +3,20 @@ using DataAccess.Models;
 
 namespace JobTrackerDataManager.Endpoints;
 
-public static class JobsEndpoint
+public static class JobEndpoints
 {
-    public static void ConfigureJobsEndpoint(this WebApplication app)
+    public static void ConfigureJobEndpoints(this WebApplication app)
     {
-        // app.MapGet("/Jobs", GetJobs);
         app.MapGet("/Jobs", GetJobs)
             .Produces<IEnumerable<JobModel>>();
         app.MapGet("/Jobs/GetById/{id:int}", GetJobById)
             .Produces<JobModel>();
-        app.MapPost("/Jobs/Insert", InsertJob);
+        app.MapPost("/Jobs", InsertJob);
         app.MapPut("/Jobs/Archive/{id:int}", ArchiveJob);
         app.MapPut("/Jobs", UpdateJob);
     }
 
-    private static async Task<IResult> GetJobs(IJobData data)
+    internal static async Task<IResult> GetJobs(IJobData data)
     {
         try
         {
@@ -29,7 +28,7 @@ public static class JobsEndpoint
         }
     }
 
-    private static async Task<IResult> GetJobById(int id, IJobData data)
+    internal static async Task<IResult> GetJobById(int id, IJobData data)
     {
         try
         {
@@ -42,7 +41,7 @@ public static class JobsEndpoint
         }
     }
 
-    private static async Task<IResult> InsertJob(JobModel job, IJobData data)
+    internal static async Task<IResult> InsertJob(JobModel job, IJobData data)
     {
         try
         {
@@ -55,12 +54,13 @@ public static class JobsEndpoint
         }
     }
 
-    private static async Task<IResult> ArchiveJob(int id, IJobData data)
+    internal static async Task<IResult> ArchiveJob(int id, IJobData data)
     {
         try
         {
-            await data.ArchiveJob(id);
-            return Results.Ok();
+            int rowsAffected = await data.ArchiveJob(id);
+
+            return rowsAffected > 0 ? Results.Ok() : Results.NotFound();
         }
         catch (Exception ex)
         {
@@ -68,12 +68,13 @@ public static class JobsEndpoint
         }
     }
 
-    private static async Task<IResult> UpdateJob(JobModel job, IJobData data)
+    internal static async Task<IResult> UpdateJob(JobModel job, IJobData data)
     {
         try
         {
-            await data.UpdateJob(job);
-            return Results.Ok();
+            int rowsAffected = await data.UpdateJob(job);
+
+            return rowsAffected > 0 ? Results.Ok() : Results.NotFound();
         }
         catch (Exception ex)
         {

@@ -22,10 +22,10 @@ public class SqlDataAccess : ISqlDataAccess
         return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
 
-    public async Task SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
+    public async Task<int> SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
     {
         using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
 
-        await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+        return await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
 }

@@ -77,7 +77,6 @@ builder.Services.AddSingleton<IJobData, JobData>();
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -89,7 +88,8 @@ app.UseAuthorization();
 
 app.UseHttpsRedirection();
 
-app.ConfigureJobsEndpoint();
-app.ConfigureUserEndpoint();
+app.ConfigureTokenEndpoints();
+app.ConfigureJobEndpoints();
+app.ConfigureUserEndpoints();
 
 app.Run();
