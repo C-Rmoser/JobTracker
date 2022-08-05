@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTrackerDataManager", "Jo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{9FF10A11-EBA5-46A6-9A93-2A88AF062596}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobTrackerDataManager.Tests", "JobTrackerDataManager.Tests\JobTrackerDataManager.Tests.csproj", "{39FA0C7A-5239-4981-9CAA-AE40E27F5BA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{9FF10A11-EBA5-46A6-9A93-2A88AF062596}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9FF10A11-EBA5-46A6-9A93-2A88AF062596}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9FF10A11-EBA5-46A6-9A93-2A88AF062596}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39FA0C7A-5239-4981-9CAA-AE40E27F5BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39FA0C7A-5239-4981-9CAA-AE40E27F5BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39FA0C7A-5239-4981-9CAA-AE40E27F5BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39FA0C7A-5239-4981-9CAA-AE40E27F5BA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
