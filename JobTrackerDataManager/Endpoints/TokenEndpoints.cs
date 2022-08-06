@@ -35,7 +35,7 @@ public static class TokenEndpoints
 
         if (!await userManager.CheckPasswordAsync(loggedInUser, user.Password))
         {
-            return Results.Problem("Password is incorrect.");
+            return Results.Unauthorized();
         }
 
         var claims = new[]

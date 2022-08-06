@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+namespace JobTrackerDataManager.data;
+
 public class AppIdentityDbContext :
     IdentityDbContext<IdentityUser, IdentityRole, string>
 {

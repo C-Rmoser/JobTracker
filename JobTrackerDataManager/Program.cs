@@ -1,6 +1,7 @@
 using System.Text;
 using DataAccess.Data;
 using DataAccess.DbAccess;
+using JobTrackerDataManager.data;
 using JobTrackerDataManager.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
