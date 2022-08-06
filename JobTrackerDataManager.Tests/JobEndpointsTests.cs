@@ -74,8 +74,8 @@ public class JobEndpointsTests
     [Fact]
     public async void InsertJob_ReturnsOk_WhenArgumentIsValid()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         await _data.InsertJob(Arg.Is(job));
 
         // Act
@@ -88,8 +88,8 @@ public class JobEndpointsTests
     [Fact]
     public async void UpdateJob_ReturnsOk_WhenJobExists()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _data.UpdateJob(Arg.Is(job)).Returns(1);
 
         // Act
@@ -102,8 +102,8 @@ public class JobEndpointsTests
     [Fact]
     public async void UpdateJob_ReturnsNotFound_WhenJobDoesNotExist()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _data.UpdateJob(Arg.Is(job)).Returns(0);
 
         // Act
@@ -116,8 +116,8 @@ public class JobEndpointsTests
     [Fact]
     public async void ArchiveJob_ReturnsOk_WhenJobExists()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _data.ArchiveJob(Arg.Is(job.Id)).Returns(1);
 
         // Act
@@ -130,8 +130,8 @@ public class JobEndpointsTests
     [Fact]
     public async void ArchiveJob_ReturnsNotFound_WhenJobDoesNotExist()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _data.ArchiveJob(Arg.Is(job.Id)).Returns(0);
 
         // Act

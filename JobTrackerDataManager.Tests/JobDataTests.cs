@@ -67,7 +67,6 @@ public class JobDataTests
     {
         // Arrange
         var jobs = new List<JobModel>();
-
         _db.LoadData<JobModel, dynamic>(Arg.Any<string>(), Arg.Any<Object>()).Returns(jobs);
         var jobData = new JobData(_db);
 
@@ -81,8 +80,8 @@ public class JobDataTests
     [Fact]
     public async void InsertJob_Returns_1_OnSuccess()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -96,8 +95,8 @@ public class JobDataTests
     [Fact]
     public async void UpdateJob_Returns_1_WhenJobExists()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -111,8 +110,8 @@ public class JobDataTests
     [Fact]
     public async void UpdateJob_Returns_0_WhenJobDoesNotExist()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(0);
         var jobData = new JobData(_db);
 
@@ -126,8 +125,8 @@ public class JobDataTests
     [Fact]
     public async void ArchiveJob_Returns_1_WhenJobExists()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -141,8 +140,8 @@ public class JobDataTests
     [Fact]
     public async void ArchiveJob_Returns_0_WhenJobDoesNotExist()
     {
-        var job = TestUtilities.GetJobs()[0];
         // Arrange
+        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(0);
         var jobData = new JobData(_db);
 

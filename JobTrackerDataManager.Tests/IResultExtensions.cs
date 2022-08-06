@@ -4,6 +4,12 @@ using Microsoft.AspNetCore.Http;
 
 namespace JobTrackerDataManager.Tests;
 
+/// <summary>
+/// These extensions are the only way to properly unit test API endpoints in .NET 6 minimal APIs
+/// This has been in fixed in .NET 7
+/// </summary>
+/// <see href="https://www.youtube.com/watch?v=VuFQtyRmS0E">Problem in .NET 6</see>
+/// <see href="https://www.youtube.com/watch?v=-i4rP0LGY5U">Fixed in .NET 7</see>
 public static class IResultExtensions
 {
     public static T? GetOkObjectResultValue<T>(this IResult result)

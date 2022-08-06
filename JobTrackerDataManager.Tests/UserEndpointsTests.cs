@@ -21,7 +21,6 @@ public class UserEndpointsTests
         userManager.CreateAsync(Arg.Any<IdentityUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
 
         // Act
-        // var result = await JobEndpoints.GetJobs(_data);
         var result = await UserEndpoints.RegisterUser(new UserRegistrationModel(), userManager);
 
         // Assert
@@ -44,7 +43,6 @@ public class UserEndpointsTests
         userManager.CreateAsync(Arg.Any<IdentityUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
 
         // Act
-        // var result = await JobEndpoints.GetJobs(_data);
         var result = await UserEndpoints.RegisterUser(new UserRegistrationModel(), userManager);
 
         // Assert
