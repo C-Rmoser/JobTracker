@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace JobTrackerDataManager.data;
+namespace JobTrackerDataManager.Data;
 
 public class AppIdentityDbContext :
     IdentityDbContext<IdentityUser, IdentityRole, string>
