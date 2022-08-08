@@ -12,6 +12,7 @@ public static class JobEndpoints
         app.MapGet("/Jobs/GetById/{id:int}", GetJobById)
             .Produces<JobModel>();
         app.MapPost("/Jobs", InsertJob);
+        app.MapPost("/Jobs/BulkInsert", InsertJobs);
         app.MapPut("/Jobs/Archive/{id:int}", ArchiveJob);
         app.MapPut("/Jobs", UpdateJob);
     }
@@ -46,6 +47,19 @@ public static class JobEndpoints
         try
         {
             await data.InsertJob(job);
+            return Results.Ok();
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(ex.Message);
+        }
+    }
+
+    internal static async Task<IResult> InsertJobs(List<JobModel> jobs, IJobData data)
+    {
+        try
+        {
+            await data.InsertJobs(jobs);
             return Results.Ok();
         }
         catch (Exception ex)

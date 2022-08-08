@@ -7,6 +7,7 @@ public interface IJobData
     Task<IEnumerable<JobModel>> GetJobs();
     Task<JobModel?> GetJobById(int id);
     Task<int> InsertJob(JobModel job);
+    Task<int> InsertJobs(List<JobModel> jobs);
     Task<int> ArchiveJob(int id);
     Task<int> UpdateJob(JobModel job);
 }

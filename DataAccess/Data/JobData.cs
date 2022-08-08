@@ -1,4 +1,5 @@
-﻿using DataAccess.DbAccess;
+﻿using System.Data;
+using DataAccess.DbAccess;
 using DataAccess.Models;
 
 namespace DataAccess.Data;
@@ -28,10 +29,44 @@ public class JobData : IJobData
         return await _db.SaveData("spJobs_Insert",
             new
             {
-                job.Title, job.Location, job.LinkToDetails,
+                job.Title, job.Location, job.Company, job.LinkToDetails,
                 job.Origin, job.FirstSeenOn
             });
     }
+
+    public async Task<int> InsertJobs(List<JobModel> jobs)
+    {
+        var dt = new DataTable();
+        dt.Columns.Add("Title");
+        dt.Columns.Add("Location");
+        dt.Columns.Add("LinkToDetails");
+        dt.Columns.Add("Origin");
+        dt.Columns.Add("FirstSeenOn");
+        dt.Columns.Add("IsArchived");
+        dt.Columns.Add("Company");
+
+        List<JobModel> dbJobs = new();
+        foreach (var job in jobs)
+        {
+            dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin, job.FirstSeenOn, job.IsArchived,
+                job.Company);
+
+            // JobModel dbJob = new()
+            // {
+            //     Title = job.Title,
+            //     Location = job.Location,
+            //     Company = job.Company,
+            //     LinkToDetails = job.LinkToDetails,
+            //     Origin = job.Origin,
+            //     FirstSeenOn = job.FirstSeenOn,
+            //     IsArchived = job.IsArchived
+            // };
+            // dbJobs.Add(dbJob);
+        }
+
+        return await _db.SaveData("spJobs_BulkInsert", new {jobs = dt});
+    }
+
 
     public async Task<int> ArchiveJob(int id)
     {
