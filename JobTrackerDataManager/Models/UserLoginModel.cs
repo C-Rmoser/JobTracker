@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Models;
+﻿namespace JobTrackerDataManager.Models;
 
 public class UserLoginModel
 {
