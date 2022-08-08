@@ -93,6 +93,21 @@ public class JobDataTests
     }
 
     [Fact]
+    public async void InsertJobs_Returns_1_OnSuccess()
+    {
+        // Arrange
+        var jobs = TestUtilities.GetJobs();
+        _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
+        var jobData = new JobData(_db);
+
+        // Act
+        var result = await jobData.InsertJobs(jobs);
+
+        // Assert
+        result.Should().Be(1);
+    }
+
+    [Fact]
     public async void UpdateJob_Returns_1_WhenJobExists()
     {
         // Arrange

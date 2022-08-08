@@ -46,7 +46,12 @@ public static class JobEndpoints
     {
         try
         {
-            await data.InsertJob(job);
+            int result = await data.InsertJob(job);
+            if (result == 0)
+            {
+                return Results.Ok("Job insertion failed.");
+            }
+
             return Results.Ok();
         }
         catch (Exception ex)
@@ -59,7 +64,12 @@ public static class JobEndpoints
     {
         try
         {
-            await data.InsertJobs(jobs);
+            int result = await data.InsertJobs(jobs);
+            if (result == 0)
+            {
+                return Results.Ok("Job insertion failed.");
+            }
+
             return Results.Ok();
         }
         catch (Exception ex)

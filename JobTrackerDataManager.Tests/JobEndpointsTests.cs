@@ -24,7 +24,7 @@ public class JobEndpointsTests
         var result = await JobEndpoints.GetJobs(_data);
 
         // Assert
-        result.GetOkObjectResultValue<List<JobModel>>().Count.Should().Be(jobs.Count);
+        result.GetOkObjectResultValue<List<JobModel>>()!.Count.Should().Be(jobs.Count);
         result.GetOkObjectResultStatusCode().Should().Be(200);
     }
 
@@ -80,6 +80,20 @@ public class JobEndpointsTests
 
         // Act
         var result = await JobEndpoints.InsertJob(job, _data);
+
+        // Assert
+        result.GetOkObjectResultStatusCode().Should().Be(200);
+    }
+
+    [Fact]
+    public async void InsertJobs_ReturnsOk_WhenArgumentIsValid()
+    {
+        // Arrange
+        var jobs = TestUtilities.GetJobs();
+        await _data.InsertJobs(Arg.Is(jobs));
+
+        // Act
+        var result = await JobEndpoints.InsertJobs(jobs, _data);
 
         // Assert
         result.GetOkObjectResultStatusCode().Should().Be(200);

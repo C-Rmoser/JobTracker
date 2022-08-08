@@ -48,20 +48,8 @@ public class JobData : IJobData
         List<JobModel> dbJobs = new();
         foreach (var job in jobs)
         {
-            dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin, job.FirstSeenOn, job.IsArchived,
-                job.Company);
-
-            // JobModel dbJob = new()
-            // {
-            //     Title = job.Title,
-            //     Location = job.Location,
-            //     Company = job.Company,
-            //     LinkToDetails = job.LinkToDetails,
-            //     Origin = job.Origin,
-            //     FirstSeenOn = job.FirstSeenOn,
-            //     IsArchived = job.IsArchived
-            // };
-            // dbJobs.Add(dbJob);
+            dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin,
+                job.FirstSeenOn, job.IsArchived, job.Company);
         }
 
         return await _db.SaveData("spJobs_BulkInsert", new {jobs = dt});
