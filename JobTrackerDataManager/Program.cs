@@ -1,12 +1,8 @@
 using System.Text;
 using DataAccess.Data;
 using DataAccess.DbAccess;
-using HtmlAgilityPack;
-using JobTrackerDataManager.Data;
+using JobTrackerDataManager.data;
 using JobTrackerDataManager.Endpoints;
-using JobTrackerDataManager.WebScraper;
-using JobTrackerDataManager.WebScraper.ScraperAPIWrapper;
-using JobTrackerDataManager.WebScraper.Scrapers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -79,10 +75,6 @@ builder.Services.AddAuthorization(options =>
 // Dependency Injection
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IJobData, JobData>();
-builder.Services.AddTransient<HtmlWeb>();
-builder.Services.AddTransient<IHtmlWeb, HtmlWebWrapper>();
-builder.Services.AddTransient<IWebScraper, KarriereAtScraper>();
-builder.Services.AddScraperFactory();
 
 var app = builder.Build();
 
@@ -100,6 +92,5 @@ app.UseHttpsRedirection();
 app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
-app.ConfigureWebScraperEndpoints();
 
 app.Run();
