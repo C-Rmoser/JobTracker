@@ -98,6 +98,7 @@ app.UseHttpsRedirection();
 app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
+app.ConfigureParseHubEndpoints();
 
 Log.ForContext("Title", new {Casing = "Uppercase"});
 

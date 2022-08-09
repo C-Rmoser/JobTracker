@@ -29,7 +29,7 @@ public class JobData : IJobData
 
     public async Task<int> InsertJob(JobModel job)
     {
-        Log.Debug("Inserting {@job} into databaes", job);
+        Log.Debug("Inserting {@job} into database", job);
 
         return await _db.SaveData("spJobs_Insert",
             new
@@ -41,6 +41,8 @@ public class JobData : IJobData
 
     public async Task<int> InsertJobs(List<JobModel> jobs)
     {
+        Log.Debug("Bulk inserting {@jobs} into database", jobs);
+
         var dt = new DataTable();
         dt.Columns.Add("Title");
         dt.Columns.Add("Location");
