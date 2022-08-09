@@ -9,10 +9,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 // TODO: https://parsehub.com/api/v2/projects/tB9RNrweWz1m/last_ready_run/data?api_key=tidGDridBPmH
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddEndpointsApiExplorer();
 
@@ -79,6 +82,7 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IJobData, JobData>();
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
@@ -94,5 +98,7 @@ app.UseHttpsRedirection();
 app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
+
+Log.ForContext("Title", new {Casing = "Uppercase"});
 
 app.Run();

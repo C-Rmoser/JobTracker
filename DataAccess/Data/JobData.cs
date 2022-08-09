@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using DataAccess.DbAccess;
 using DataAccess.Models;
+using Serilog;
 
 namespace DataAccess.Data;
 
@@ -13,8 +14,10 @@ public class JobData : IJobData
         _db = db;
     }
 
-    public Task<IEnumerable<JobModel>> GetJobs() =>
-        _db.LoadData<JobModel, dynamic>("spJobs_GetAll", new { });
+    public Task<IEnumerable<JobModel>> GetJobs()
+    {
+        return _db.LoadData<JobModel, dynamic>("spJobs_GetAll", new { });
+    }
 
     public async Task<JobModel?> GetJobById(int id)
     {
@@ -26,6 +29,8 @@ public class JobData : IJobData
 
     public async Task<int> InsertJob(JobModel job)
     {
+        Log.Debug("Inserting {@job} into databaes", job);
+
         return await _db.SaveData("spJobs_Insert",
             new
             {
@@ -45,7 +50,6 @@ public class JobData : IJobData
         dt.Columns.Add("IsArchived");
         dt.Columns.Add("Company");
 
-        List<JobModel> dbJobs = new();
         foreach (var job in jobs)
         {
             dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin,

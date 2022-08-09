@@ -66,8 +66,7 @@ public class JobDataTests
     public async void GetJobById_ReturnsNull_WhenJobDoesNotExist()
     {
         // Arrange
-        var jobs = new List<JobModel>();
-        _db.LoadData<JobModel, dynamic>(Arg.Any<string>(), Arg.Any<Object>()).Returns(jobs);
+        _db.LoadData<JobModel, dynamic>(Arg.Any<string>(), Arg.Any<Object>()).Returns(new List<JobModel>());
         var jobData = new JobData(_db);
 
         // Act
@@ -141,7 +140,6 @@ public class JobDataTests
     public async void ArchiveJob_Returns_1_WhenJobExists()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -156,7 +154,6 @@ public class JobDataTests
     public async void ArchiveJob_Returns_0_WhenJobDoesNotExist()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(0);
         var jobData = new JobData(_db);
 

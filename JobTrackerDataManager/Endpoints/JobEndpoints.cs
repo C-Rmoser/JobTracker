@@ -1,5 +1,6 @@
 ﻿using DataAccess.Data;
 using DataAccess.Models;
+using Serilog;
 
 namespace JobTrackerDataManager.Endpoints;
 
@@ -64,9 +65,12 @@ public static class JobEndpoints
     {
         try
         {
+            Log.ForContext("Jobs", jobs).Debug("Inserting jobs into database");
+
             int result = await data.InsertJobs(jobs);
             if (result == 0)
             {
+                Log.Debug("Job insertion failed.");
                 return Results.Ok("Job insertion failed.");
             }
 
