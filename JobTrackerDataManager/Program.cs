@@ -11,12 +11,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
-// TODO: https://parsehub.com/api/v2/projects/tB9RNrweWz1m/last_ready_run/data?api_key=tidGDridBPmH
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
 
+builder.Services.AddMvcCore();
 builder.Services.AddEndpointsApiExplorer();
 
 var connectionString = builder.Configuration.GetConnectionString("Default");
@@ -80,7 +79,6 @@ builder.Services.AddAuthorization(options =>
 // Dependency Injection
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IJobData, JobData>();
-builder.Services.AddHttpClient();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
@@ -100,7 +98,5 @@ app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
 app.ConfigureParseHubEndpoints();
-
-Log.ForContext("Title", new {Casing = "Uppercase"});
 
 app.Run();
