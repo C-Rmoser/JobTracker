@@ -99,5 +99,6 @@ app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
 app.ConfigureParseHubEndpoints();
+app.ConfigureSimpleScraperEndpoints();
 
 app.Run();

@@ -26,7 +26,7 @@ public class JobDataTests
         var result = await jobData.GetJobs();
 
         // Assert
-        result.Count().Should().Be(3);
+        result.Should().BeEquivalentTo(jobs);
     }
 
     [Fact]

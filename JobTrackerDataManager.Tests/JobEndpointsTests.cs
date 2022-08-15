@@ -90,7 +90,6 @@ public class JobEndpointsTests
     {
         // Arrange
         var jobs = TestUtilities.GetJobs();
-        await _data.InsertJobs(Arg.Is(jobs));
 
         // Act
         var result = await JobEndpoints.InsertJobs(jobs, _data);

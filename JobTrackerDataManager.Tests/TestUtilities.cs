@@ -41,4 +41,42 @@ public static class TestUtilities
 
         return jobs;
     }
+
+    public static IEnumerable<ParseHubRunModel> GetParseHubRuns()
+    {
+        List<ParseHubRunModel> runs = new()
+        {
+            new ParseHubRunModel()
+            {
+                ProjectToken = "tB9RNrweWz1m",
+                RunToken = "tTokxBvdDnn_",
+                Status = "initialized",
+                DataReady = "0",
+                StartTime = "2022-08-11T11:51:19",
+                EndTime = null,
+                Pages = "2",
+                Md5Sum = null,
+                StartUrl = "https://www.karriere.at/jobs",
+                StartTemplate = "main_template",
+                StartValue = "{}"
+            },
+
+            new ParseHubRunModel()
+            {
+                ProjectToken = "tB9RNrweWz1m",
+                RunToken = "tTokxBvdDnn_",
+                Status = "initialized",
+                DataReady = "1",
+                StartTime = "2022-08-11T11:51:19",
+                EndTime = "2022-08-11T11:51:35.824534",
+                Pages = "2",
+                Md5Sum = "8b01f39c3e7aa2a78380ed3ad52c70f5",
+                StartUrl = "https://www.karriere.at/jobs",
+                StartTemplate = "main_template",
+                StartValue = "{}"
+            }
+        };
+
+        return runs;
+    }
 }

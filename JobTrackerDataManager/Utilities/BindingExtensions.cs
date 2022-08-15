@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace JobTrackerDataManager;
+namespace JobTrackerDataManager.Utilities;
 
 public static class BindingExtensions
 {
