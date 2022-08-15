@@ -1,4 +1,4 @@
-﻿using JobTrackerDataManager.DTOs;
+﻿using JobTrackerDataManager.Models;
 using Serilog;
 
 namespace JobTrackerDataManager.Endpoints;
@@ -11,9 +11,9 @@ public static class SimpleScraperEndpoints
             .AllowAnonymous();
     }
 
-    internal static async Task<IResult> SimpleScraperWebHook(SimpleScraperDto? dto)
+    internal static async Task<IResult> SimpleScraperWebHook(List<SimpleScraperModel> data)
     {
-        Log.Information("Receiving Web Scraping data. {@dto}", dto);
+        Log.Information("Receiving Web Scraping data. {@data}", data);
         return Results.Ok();
     }
 }
