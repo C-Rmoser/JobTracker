@@ -11,7 +11,7 @@ public class SimpleScraperModel
     public string Title { get; set; }
     public string Title_link { get; set; }
     public int index { get; set; }
-    public DateTime timestamp { get; set; }
+    public long timestamp { get; set; }
     public string timestampString { get; set; }
     public string uid { get; set; }
     public string url { get; set; }
