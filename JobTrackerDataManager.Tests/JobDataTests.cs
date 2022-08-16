@@ -18,7 +18,7 @@ public class JobDataTests
     public async void GetJobs_ReturnsJobs_WhenJobsExist()
     {
         // Arrange
-        IEnumerable<JobModel> jobs = TestUtilities.GetJobs();
+        IEnumerable<JobModel> jobs = Utilities.GetJobs();
         _db.LoadData<JobModel, dynamic>(Arg.Any<string>(), Arg.Any<Object>()).Returns(jobs);
         var jobData = new JobData(_db);
 
@@ -49,7 +49,7 @@ public class JobDataTests
     {
         // Arrange
         var jobs = new List<JobModel>();
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         jobs.Add(job);
 
         _db.LoadData<JobModel, dynamic>(Arg.Any<string>(), Arg.Any<Object>()).Returns(jobs);
@@ -80,7 +80,7 @@ public class JobDataTests
     public async void InsertJob_Returns_1_OnSuccess()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -95,7 +95,7 @@ public class JobDataTests
     public async void InsertJobs_Returns_1_OnSuccess()
     {
         // Arrange
-        var jobs = TestUtilities.GetJobs();
+        var jobs = Utilities.GetJobs();
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -110,7 +110,7 @@ public class JobDataTests
     public async void UpdateJob_Returns_1_WhenJobExists()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(1);
         var jobData = new JobData(_db);
 
@@ -125,7 +125,7 @@ public class JobDataTests
     public async void UpdateJob_Returns_0_WhenJobDoesNotExist()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _db.SaveData(Arg.Any<string>(), Arg.Any<Object>()).Returns(0);
         var jobData = new JobData(_db);
 

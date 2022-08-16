@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JobTrackerDataManager.Tests;
 
@@ -47,6 +48,16 @@ public static class IResultExtensions
         return (int?) Type
             .GetType("Microsoft.AspNetCore.Http.Result.NotFoundObjectResult, Microsoft.AspNetCore.Http.Results")?
             .GetProperty("StatusCode",
+                BindingFlags.Instance | BindingFlags.NonPublic |
+                BindingFlags.Public)?
+            .GetValue(result);
+    }
+
+    public static ProblemDetails? GetProblemObject(this IResult result)
+    {
+        return (ProblemDetails?) Type
+            .GetType("Microsoft.AspNetCore.Http.Result.ObjectResult, Microsoft.AspNetCore.Http.Results")?
+            .GetProperty("Value",
                 BindingFlags.Instance | BindingFlags.NonPublic |
                 BindingFlags.Public)?
             .GetValue(result);

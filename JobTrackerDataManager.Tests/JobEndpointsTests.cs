@@ -16,7 +16,7 @@ public class JobEndpointsTests
     public async void GetJobs_ReturnsJobs_WhenJobsExist()
     {
         // Arrange
-        var jobs = TestUtilities.GetJobs();
+        var jobs = Utilities.GetJobs();
 
         _data.GetJobs().Returns(jobs);
 
@@ -46,7 +46,7 @@ public class JobEndpointsTests
     {
         // Arrange
         const int id = 1;
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
 
         _data.GetJobById(Arg.Is(id)).Returns(job);
 
@@ -75,8 +75,7 @@ public class JobEndpointsTests
     public async void InsertJob_ReturnsOk_WhenArgumentIsValid()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
-        await _data.InsertJob(Arg.Is(job));
+        var job = Utilities.GetJobs()[0];
 
         // Act
         var result = await JobEndpoints.InsertJob(job, _data);
@@ -89,7 +88,7 @@ public class JobEndpointsTests
     public async void InsertJobs_ReturnsOk_WhenArgumentIsValid()
     {
         // Arrange
-        var jobs = TestUtilities.GetJobs();
+        var jobs = Utilities.GetJobs();
 
         // Act
         var result = await JobEndpoints.InsertJobs(jobs, _data);
@@ -102,7 +101,7 @@ public class JobEndpointsTests
     public async void UpdateJob_ReturnsOk_WhenJobExists()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _data.UpdateJob(Arg.Is(job)).Returns(1);
 
         // Act
@@ -116,7 +115,7 @@ public class JobEndpointsTests
     public async void UpdateJob_ReturnsNotFound_WhenJobDoesNotExist()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _data.UpdateJob(Arg.Is(job)).Returns(0);
 
         // Act
@@ -130,7 +129,7 @@ public class JobEndpointsTests
     public async void ArchiveJob_ReturnsOk_WhenJobExists()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _data.ArchiveJob(Arg.Is(job.Id)).Returns(1);
 
         // Act
@@ -144,7 +143,7 @@ public class JobEndpointsTests
     public async void ArchiveJob_ReturnsNotFound_WhenJobDoesNotExist()
     {
         // Arrange
-        var job = TestUtilities.GetJobs()[0];
+        var job = Utilities.GetJobs()[0];
         _data.ArchiveJob(Arg.Is(job.Id)).Returns(0);
 
         // Act
