@@ -79,7 +79,6 @@ builder.Services.AddAuthorization(options =>
 // Dependency Injection
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IJobData, JobData>();
-builder.Services.AddSingleton<IParseHubRunData, ParseHubRunData>();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
@@ -98,7 +97,6 @@ app.UseHttpsRedirection();
 app.ConfigureTokenEndpoints();
 app.ConfigureJobEndpoints();
 app.ConfigureUserEndpoints();
-app.ConfigureParseHubEndpoints();
 app.ConfigureSimpleScraperEndpoints();
 
 app.Run();
