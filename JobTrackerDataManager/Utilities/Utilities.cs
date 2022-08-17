@@ -41,17 +41,16 @@ public static class Utilities
                 continue;
             }
 
+            // Location string is messy because the element can not be isolated by the web scraper
             // Enter Regex at https://regex101.com for explanation
             Regex regex = new Regex(@"((?<=\d\dk\s*)|^)[A-ZÄÖÜ][a-zäöüß][a-z.äöüß].*?((?=\s*\t)|$)");
 
-            var newLocation = dto.location;
-
-            var match = regex.Match(newLocation);
+            var location = regex.Match(dto.location);
 
             JobModel job = new()
             {
                 Title = dto.title,
-                Location = match.ToString(),
+                Location = location.ToString(),
                 Company = dto.company,
                 LinkToDetails = dto.description_link,
                 Origin = "devjobs.at",

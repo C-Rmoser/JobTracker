@@ -9,9 +9,9 @@ public static class ScraperEndpoints
 {
     public static void ConfigureSimpleScraperEndpoints(this WebApplication app)
     {
-        app.MapPost("/KarriereWebHook", KarriereAtWebHook)
+        app.MapPost("/KarriereAtWebHook", KarriereAtWebHook)
             .AllowAnonymous();
-        app.MapPost("/DevJobsWebHook", DevJobsAtWebHook)
+        app.MapPost("/DevJobsAtWebHook", DevJobsAtWebHook)
             .AllowAnonymous();
         app.MapPost("/JobsAtWebHook", JobsAtWebHook)
             .AllowAnonymous();
@@ -35,7 +35,7 @@ public static class ScraperEndpoints
         }
         catch (Exception ex)
         {
-            Log.Error("Unable to Insert {@dtos} into database", dtos);
+            Log.Error(ex, "Unable to Insert {@dtos} into database", dtos);
             return Results.Problem(ex.Message, null, 500);
         }
 
@@ -60,7 +60,7 @@ public static class ScraperEndpoints
         }
         catch (Exception ex)
         {
-            Log.Error("Unable to Insert {@dtos} into database", dtos);
+            Log.Error(ex, "Unable to Insert {@dtos} into database", dtos);
             return Results.Problem(ex.Message, null, 500);
         }
 
@@ -84,7 +84,7 @@ public static class ScraperEndpoints
         }
         catch (Exception ex)
         {
-            Log.Error("Unable to Insert {@dtos} into database", dtos);
+            Log.Error(ex, "Unable to Insert {@dtos} into database", dtos);
             return Results.Problem(ex.Message, null, 500);
         }
 

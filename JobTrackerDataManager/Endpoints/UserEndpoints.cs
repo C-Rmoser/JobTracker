@@ -1,5 +1,6 @@
 ﻿using JobTrackerDataManager.Models;
 using Microsoft.AspNetCore.Identity;
+using Serilog;
 
 namespace JobTrackerDataManager.Endpoints;
 
@@ -27,13 +28,20 @@ public static class UserEndpoints
             UserName = user.EmailAddress
         };
 
-        IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
-
-        if (result.Succeeded)
+        try
         {
-            return Results.Ok();
+            IdentityResult result = await userManager.CreateAsync(newUser, user.Password);
+
+            if (result.Succeeded)
+            {
+                return Results.Ok();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.Error("Unable to create User");
         }
 
-        return Results.Problem("Unable to create user.");
+        return Results.Problem("Unable to create user.", null, 500);
     }
 }

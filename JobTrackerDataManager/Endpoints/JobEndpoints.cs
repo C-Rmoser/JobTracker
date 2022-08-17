@@ -1,5 +1,6 @@
 ﻿using DataAccess.Data;
 using DataAccess.Models;
+using Serilog;
 
 namespace JobTrackerDataManager.Endpoints;
 
@@ -25,6 +26,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to retrieve Jobs");
             return Results.Problem(ex.Message);
         }
     }
@@ -38,6 +40,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to retrieve Job by Id");
             return Results.Problem(ex.Message);
         }
     }
@@ -56,6 +59,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to insert job");
             return Results.Problem(ex.Message);
         }
     }
@@ -74,6 +78,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to insert jobs");
             return Results.Problem(ex.Message);
         }
     }
@@ -88,6 +93,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to archive job");
             return Results.Problem(ex.Message);
         }
     }
@@ -102,6 +108,7 @@ public static class JobEndpoints
         }
         catch (Exception ex)
         {
+            Log.Error(ex, "Unable to update job");
             return Results.Problem(ex.Message);
         }
     }
