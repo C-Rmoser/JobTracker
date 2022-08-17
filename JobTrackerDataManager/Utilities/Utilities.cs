@@ -1,4 +1,5 @@
-﻿using DataAccess.Models;
+﻿using System.Text.RegularExpressions;
+using DataAccess.Models;
 using JobTrackerDataManager.DTOs;
 
 namespace JobTrackerDataManager.Utilities;
@@ -40,11 +41,17 @@ public static class Utilities
                 continue;
             }
 
+            // Enter Regex at https://regex101.com for explanation
+            Regex regex = new Regex(@"((?<=\d\dk\s*)|^)[A-ZÄÖÜ][a-zäöüß][a-z.äöüß].*?((?=\s*\t)|$)");
+
+            var newLocation = dto.location;
+
+            var match = regex.Match(newLocation);
+
             JobModel job = new()
             {
                 Title = dto.title,
-                // TODO: extract correct ones
-                Location = dto.location,
+                Location = match.ToString(),
                 Company = dto.company,
                 LinkToDetails = dto.description_link,
                 Origin = "devjobs.at",
