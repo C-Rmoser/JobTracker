@@ -58,6 +58,6 @@ public static class TokenEndpoints
 
         var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-        return Results.Ok(tokenString);
+        return Results.Ok(new {token = tokenString});
     }
 }
