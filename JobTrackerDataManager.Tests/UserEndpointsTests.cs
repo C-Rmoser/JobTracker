@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using JobTrackerDataManager.data;
 using JobTrackerDataManager.Endpoints;
 using JobTrackerDataManager.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,16 +10,16 @@ namespace JobTrackerDataManager.Tests;
 
 public class UserEndpointsTests
 {
-    private readonly IUserStore<IdentityUser> store = Substitute.For<IUserStore<IdentityUser>>();
+    private readonly IUserStore<ApplicationUser> store = Substitute.For<IUserStore<ApplicationUser>>();
 
     [Fact]
     public async void GetToken_ReturnsToken_WhenUserDataIsValid()
     {
         var userManager =
-            Substitute.For<UserManager<IdentityUser>>(store, null, null, null, null, null, null, null, null);
+            Substitute.For<UserManager<ApplicationUser>>(store, null, null, null, null, null, null, null, null);
 
-        userManager.FindByEmailAsync(Arg.Any<string>()).Returns((IdentityUser?) null);
-        userManager.CreateAsync(Arg.Any<IdentityUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
+        userManager.FindByEmailAsync(Arg.Any<string>()).Returns((ApplicationUser?) null);
+        userManager.CreateAsync(Arg.Any<ApplicationUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
 
         // Act
         var result = await UserEndpoints.RegisterUser(new UserRegistrationModel(), userManager);
@@ -31,16 +32,16 @@ public class UserEndpointsTests
     public async void GetToken_ReturnsConflict409_WhenUserIsAlreadyRegistered()
     {
         var userManager =
-            Substitute.For<UserManager<IdentityUser>>(store, null, null, null, null, null, null, null, null);
+            Substitute.For<UserManager<ApplicationUser>>(store, null, null, null, null, null, null, null, null);
 
-        var identityUser = new IdentityUser()
+        var identityUser = new ApplicationUser()
         {
             Email = "testuser@gmail.com",
             UserName = "TestUser"
         };
 
         userManager.FindByEmailAsync(Arg.Any<string>()).Returns(identityUser);
-        userManager.CreateAsync(Arg.Any<IdentityUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
+        userManager.CreateAsync(Arg.Any<ApplicationUser>(), Arg.Any<string>()).Returns(IdentityResult.Success);
 
         // Act
         var result = await UserEndpoints.RegisterUser(new UserRegistrationModel(), userManager);

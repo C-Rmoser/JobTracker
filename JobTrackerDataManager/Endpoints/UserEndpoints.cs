@@ -1,4 +1,5 @@
-﻿using JobTrackerDataManager.Models;
+﻿using JobTrackerDataManager.data;
+using JobTrackerDataManager.Models;
 using Microsoft.AspNetCore.Identity;
 using Serilog;
 
@@ -8,11 +9,13 @@ public static class UserEndpoints
 {
     public static void ConfigureUserEndpoints(this WebApplication app)
     {
+        // TODO: Remove AllowAnonymous() at some point
         app.MapPost("/User/Register", RegisterUser)
-            .Accepts<UserRegistrationModel>("application/json");
+            .Accepts<UserRegistrationModel>("application/json").AllowAnonymous();
     }
 
-    internal static async Task<IResult> RegisterUser(UserRegistrationModel user, UserManager<IdentityUser> userManager)
+    internal static async Task<IResult> RegisterUser(UserRegistrationModel user,
+        UserManager<ApplicationUser> userManager)
     {
         var existingUser = await userManager.FindByEmailAsync(user.EmailAddress);
 
@@ -21,7 +24,7 @@ public static class UserEndpoints
             return Results.Conflict();
         }
 
-        IdentityUser newUser = new()
+        ApplicationUser newUser = new()
         {
             Email = user.EmailAddress,
             EmailConfirmed = true,

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace JobTrackerDataManager.data;
 
 public class AppIdentityDbContext :
-    IdentityDbContext<IdentityUser, IdentityRole, string>
+    IdentityDbContext<ApplicationUser, IdentityRole, string>
 {
     public AppIdentityDbContext
         (DbContextOptions<AppIdentityDbContext> options)
