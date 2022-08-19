@@ -56,15 +56,17 @@ public static class TokenEndpoints
 
         _ = int.TryParse(config["Jwt:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
         loggedInUser.RefreshToken = refreshToken;
-        loggedInUser.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+        var refreshTokenExpiresAt = DateTime.Now.AddDays(refreshTokenValidityInDays);
+        loggedInUser.RefreshTokenExpiryTime = refreshTokenExpiresAt;
 
         await userManager.UpdateAsync(loggedInUser);
 
         return Results.Ok(new
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
+            TokenExpiresAt = token.ValidTo,
             RefreshToken = refreshToken,
-            Expiration = token.ValidTo
+            RefreshTokenExpiresAt = refreshTokenExpiresAt
         });
     }
 
@@ -121,12 +123,18 @@ public static class TokenEndpoints
         var newRefreshToken = GenerateRefreshToken();
 
         user.RefreshToken = newRefreshToken;
+        _ = int.TryParse(config["Jwt:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
+        var refreshTokenExpiresAt = DateTime.Now.AddDays(refreshTokenValidityInDays);
+        user.RefreshTokenExpiryTime = refreshTokenExpiresAt;
+
         await userManager.UpdateAsync(user);
 
         return Results.Ok(new
         {
             Token = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
-            RefreshToken = newRefreshToken
+            TokenExpiresAt = newAccessToken.ValidTo,
+            RefreshToken = newRefreshToken,
+            RefreshTokenExpiresAt = refreshTokenExpiresAt
         });
     }
 
