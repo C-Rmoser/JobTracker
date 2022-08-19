@@ -14,12 +14,12 @@ public static class TokenEndpoints
 {
     public static void ConfigureTokenEndpoints(this WebApplication app)
     {
-        app.MapPost("/Token", GetToken)
+        app.MapPost("/token", GetToken)
             .Accepts<UserLoginModel>("application/json")
             .Produces<string>()
             .AllowAnonymous();
 
-        app.MapPost("/RefreshToken", RefreshToken)
+        app.MapPost("/refresh-token", RefreshToken)
             .Accepts<TokenDto>("application/json")
             .Produces<string>()
             .AllowAnonymous();

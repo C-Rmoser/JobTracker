@@ -8,14 +8,14 @@ public static class JobEndpoints
 {
     public static void ConfigureJobEndpoints(this WebApplication app)
     {
-        app.MapGet("/Jobs", GetJobs)
+        app.MapGet("/jobs", GetJobs)
             .Produces<IEnumerable<JobModel>>();
-        app.MapGet("/Jobs/GetById/{id:int}", GetJobById)
+        app.MapGet("/jobs/get-by-id/{id:int}", GetJobById)
             .Produces<JobModel>();
-        app.MapPost("/Jobs", InsertJob);
-        app.MapPost("/Jobs/BulkInsert", InsertJobs);
-        app.MapPut("/Jobs/Archive/{id:int}", ArchiveJob);
-        app.MapPut("/Jobs", UpdateJob);
+        app.MapPost("/jobs", InsertJob);
+        app.MapPost("/jobs/bulk-insert", InsertJobs);
+        app.MapPut("/jobs/archive/{id:int}", ArchiveJob);
+        app.MapPut("/jobs", UpdateJob);
     }
 
     internal static async Task<IResult> GetJobs(IJobData data)

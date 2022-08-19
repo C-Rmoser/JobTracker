@@ -9,11 +9,11 @@ public static class ScraperEndpoints
 {
     public static void ConfigureSimpleScraperEndpoints(this WebApplication app)
     {
-        app.MapPost("/KarriereAtWebHook", KarriereAtWebHook)
+        app.MapPost("/karriere-at-web-hook", KarriereAtWebHook)
             .AllowAnonymous();
-        app.MapPost("/DevJobsAtWebHook", DevJobsAtWebHook)
+        app.MapPost("/dev-jobs-at-web-hook", DevJobsAtWebHook)
             .AllowAnonymous();
-        app.MapPost("/JobsAtWebHook", JobsAtWebHook)
+        app.MapPost("/jobs-at-web-hook", JobsAtWebHook)
             .AllowAnonymous();
     }
 

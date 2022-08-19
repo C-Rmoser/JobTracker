@@ -10,7 +10,7 @@ public static class UserEndpoints
     public static void ConfigureUserEndpoints(this WebApplication app)
     {
         // TODO: Remove AllowAnonymous() at some point
-        app.MapPost("/User/Register", RegisterUser)
+        app.MapPost("/user/register", RegisterUser)
             .Accepts<UserRegistrationModel>("application/json").AllowAnonymous();
     }
 
