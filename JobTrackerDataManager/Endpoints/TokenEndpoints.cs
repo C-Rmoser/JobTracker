@@ -16,12 +16,10 @@ public static class TokenEndpoints
     {
         app.MapPost("/token", GetToken)
             .Accepts<UserLoginModel>("application/json")
-            .Produces<string>()
             .AllowAnonymous();
 
         app.MapPost("/refresh-token", RefreshToken)
             .Accepts<TokenDto>("application/json")
-            .Produces<string>()
             .AllowAnonymous();
     }
 
