@@ -18,7 +18,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy => { policy.WithOrigins("http://localhost:3000"); });
+        policy =>
+        {
+            policy.WithOrigins(
+                "http://localhost:3000",
+                "https://job-tracker-react-ui.netlify.app"
+            );
+        });
 });
 
 builder.Host.UseSerilog((ctx, cfg) => cfg.ReadFrom.Configuration(ctx.Configuration));
