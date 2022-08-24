@@ -12,10 +12,16 @@ public static class Utilities
 
         foreach (var dto in dtos)
         {
+            var regex = new Regex(@"[,]\s*");
+            string correctLocation = regex.Replace(dto.location, ", ");
+
+            regex = new Regex(@"\s*am.*$");
+            correctLocation = regex.Replace(correctLocation, "");
+
             JobModel job = new()
             {
                 Title = dto.title,
-                Location = dto.location,
+                Location = correctLocation,
                 Company = dto.company,
                 LinkToDetails = dto.title_link,
                 Origin = "karriere.at",
