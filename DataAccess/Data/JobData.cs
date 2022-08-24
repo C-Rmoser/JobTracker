@@ -65,8 +65,25 @@ public class JobData : IJobData
         dt.Columns.Add("IsArchived");
         dt.Columns.Add("Company");
 
+        // Unique entries can be identified by the link to the job details posting.
+        var linkToDetailSet = new HashSet<string>();
+
         foreach (var job in jobs)
         {
+            if (job.LinkToDetails == null)
+            {
+                job.LinkToDetails = "";
+            }
+
+            // The WebScraper sometimes posts duplicate entries within one single run.
+            // Sort them out.
+            if (linkToDetailSet.Contains(job.LinkToDetails))
+            {
+                continue;
+            }
+
+            linkToDetailSet.Add(job.LinkToDetails);
+
             var searchedJob = dbJobs.FirstOrDefault(dbJob => dbJob.LinkToDetails == job.LinkToDetails);
 
             if (searchedJob == null)
@@ -86,7 +103,6 @@ public class JobData : IJobData
         {
             if (job.IsArchived)
             {
-                // Update archived jobs in database.
                 await UpdateJob(job);
             }
         }
