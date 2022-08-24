@@ -58,6 +58,7 @@ public class JobData : IJobData
         var dt = new DataTable();
         dt.Columns.Add("Title");
         dt.Columns.Add("Location");
+        dt.Columns.Add("Description");
         dt.Columns.Add("LinkToDetails");
         dt.Columns.Add("Origin");
         dt.Columns.Add("FirstSeenOn");
@@ -72,7 +73,7 @@ public class JobData : IJobData
             {
                 // New job postings will be inserted into the database.
                 dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin,
-                    job.FirstSeenOn, job.IsArchived, job.Company);
+                    job.FirstSeenOn, job.IsArchived, job.Company, job.Description);
             }
             else
             {

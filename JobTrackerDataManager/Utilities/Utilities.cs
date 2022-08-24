@@ -22,6 +22,7 @@ public static class Utilities
             {
                 Title = dto.title,
                 Location = correctLocation,
+                Description = dto.description,
                 Company = dto.company,
                 LinkToDetails = dto.title_link,
                 Origin = "karriere.at",
@@ -57,6 +58,7 @@ public static class Utilities
             {
                 Title = dto.title,
                 Location = location.ToString(),
+                Description = dto.description,
                 Company = dto.company,
                 LinkToDetails = dto.description_link,
                 Origin = "devjobs.at",
