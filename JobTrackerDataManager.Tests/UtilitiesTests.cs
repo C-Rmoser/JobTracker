@@ -5,7 +5,7 @@ using Xunit;
 
 namespace JobTrackerDataManager.Tests;
 
-public class UtilitiesTests
+public static class UtilitiesTests
 {
     [Fact]
     public static void MapKarriereAtDtosToJobs_ShouldReturnJobs_WhenArgumentIsValid()

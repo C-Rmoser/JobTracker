@@ -41,6 +41,18 @@ public class JobData : IJobData
 
     public async Task<int> InsertJobs(List<JobModel> jobs)
     {
+        List<JobModel> dbJobs = (await GetJobs()).ToList();
+
+        // Archive all jobs from same origin as parameter jobs.
+        // Jobs that are still active are unarchived later on.
+        foreach (var job in dbJobs)
+        {
+            if (job.Origin == jobs[0].Origin)
+            {
+                job.IsArchived = true;
+            }
+        }
+
         Log.Debug("Bulk inserting {@jobs} into database", jobs);
 
         var dt = new DataTable();
@@ -54,8 +66,28 @@ public class JobData : IJobData
 
         foreach (var job in jobs)
         {
-            dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin,
-                job.FirstSeenOn, job.IsArchived, job.Company);
+            var searchedJob = dbJobs.FirstOrDefault(dbJob => dbJob.LinkToDetails == job.LinkToDetails);
+
+            if (searchedJob == null)
+            {
+                // New job postings will be inserted into the database.
+                dt.Rows.Add(job.Title, job.Location, job.LinkToDetails, job.Origin,
+                    job.FirstSeenOn, job.IsArchived, job.Company);
+            }
+            else
+            {
+                // Duplicate job means that it is already in the database. Undo archive from earlier.
+                searchedJob.IsArchived = false;
+            }
+        }
+
+        foreach (var job in dbJobs)
+        {
+            if (job.IsArchived)
+            {
+                // Update archived jobs in database.
+                await UpdateJob(job);
+            }
         }
 
         return await _db.SaveData("spJobs_BulkInsert", new {jobs = dt});
