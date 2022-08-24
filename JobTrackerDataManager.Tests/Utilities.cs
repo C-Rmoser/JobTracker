@@ -16,6 +16,7 @@ public static class Utilities
                 Id = 1,
                 Title = "C# Developer",
                 Location = "Salzburg",
+                Company = "AXESS",
                 LinkToDetails = "www.karriere.at/csharpjob",
                 Origin = "Karriere.at",
                 FirstSeenOn = DateTime.Now
@@ -25,6 +26,7 @@ public static class Utilities
                 Id = 2,
                 Title = "Javascript Developer",
                 Location = "Wals",
+                Company = "Eurofunk Kappacher",
                 LinkToDetails = "www.jobs.at/jsjob",
                 Origin = "Jobs.at",
                 FirstSeenOn = DateTime.Now
@@ -33,6 +35,7 @@ public static class Utilities
             {
                 Id = 3,
                 Title = "FullStack Developer",
+                Company = "Windhager Zentralheizung",
                 Location = "Haag",
                 LinkToDetails = "www.dev-jobs.at/fullstackjob",
                 Origin = "dev-jobs.at",
@@ -148,63 +151,6 @@ public static class Utilities
                 location_link = "https://www.karriere.at/jobs/salzburg-stadt",
                 status = "",
                 title = "Fullstack C# Developer (m/w/d)",
-                index = 1,
-                timestamp = 1660571415703,
-                timestampstring = "Mon, 15 Aug 2022 13:50:15 GMT",
-                uid = "uLnMJ2gjKi8q2NaoEUJf",
-                url = "https://www.karriere.at/jobs/c%23/salzburg-stadt?radius=30",
-                url_uid = "1"
-            }
-        };
-
-        return dtos;
-    }
-
-    public static List<JobsAtDto> GetJobsAtDtos()
-    {
-        List<JobsAtDto> dtos = new()
-        {
-            new JobsAtDto()
-            {
-                company = "HR Consulting Ines Schöffmann GmbH",
-                company_link = "https://www.karriere.at/f/eurofunk-kappacher",
-                description = "Wo und wie du Softwareentwicklung gelernt hast, ist egal. Hauptsach",
-                location = "Salzburg (Stadt), Sankt Johann im Pongau, Linz, Klagenfurt am Wörthe",
-                location_link = "https://www.karriere.at/jobs/salzburg-stadt",
-                title = "Fullstack C# Developer (m/w/d)",
-                title_link = "https://www.karriere.at/jobs/6360305",
-                index = 1,
-                timestamp = 1660571415703,
-                timestampstring = "Mon, 15 Aug 2022 13:50:15 GMT",
-                uid = "uLnMJ2gjKi8q2NaoEUJf",
-                url = "https://www.karriere.at/jobs/c%23/salzburg-stadt?radius=30",
-                url_uid = "1"
-            },
-            new JobsAtDto()
-            {
-                company = "eurofunk Kappacher GmbH",
-                company_link = "https://www.karriere.at/f/eurofunk-kappacher",
-                description = "FULLSTACK C# DEVELOPER (m/w/d) YOU ENJOY CODING WITH C#! D",
-                location = "Salzburg (Stadt), Sankt Johann im Pongau, Linz, Klagenfurt am Wörthe",
-                location_link = "https://www.karriere.at/jobs/salzburg-stadt",
-                title = "Fullstack C# Developer (m/w/d)",
-                title_link = "https://www.karriere.at/jobs/6360305",
-                index = 1,
-                timestamp = 1660571415703,
-                timestampstring = "Mon, 15 Aug 2022 13:50:15 GMT",
-                uid = "uLnMJ2gjKi8q2NaoEUJf",
-                url = "https://www.karriere.at/jobs/c%23/salzburg-stadt?radius=30",
-                url_uid = "1"
-            },
-            new JobsAtDto()
-            {
-                company = "Ramsauer & Stürmer Software GmbH",
-                company_link = "https://www.karriere.at/f/eurofunk-kappacher",
-                description = "Wir bieten dir ein Gehalt ab EUR 2.600 (Junior) und ab EUR 3.300",
-                location = "Salzburg (Stadt), Sankt Johann im Pongau, Linz, Klagenfurt am Wörthe",
-                location_link = "https://www.karriere.at/jobs/salzburg-stadt",
-                title = "Fullstack C# Developer (m/w/d)",
-                title_link = "https://www.karriere.at/jobs/6360305",
                 index = 1,
                 timestamp = 1660571415703,
                 timestampstring = "Mon, 15 Aug 2022 13:50:15 GMT",

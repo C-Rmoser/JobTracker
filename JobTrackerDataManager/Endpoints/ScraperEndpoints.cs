@@ -13,8 +13,6 @@ public static class ScraperEndpoints
             .AllowAnonymous();
         app.MapPost("/dev-jobs-at-web-hook", DevJobsAtWebHook)
             .AllowAnonymous();
-        app.MapPost("/jobs-at-web-hook", JobsAtWebHook)
-            .AllowAnonymous();
     }
 
     internal static async Task<IResult> KarriereAtWebHook(List<KarriereAtDto> dtos, IJobData data)
@@ -56,30 +54,6 @@ public static class ScraperEndpoints
         try
         {
             List<JobModel> jobs = Utilities.Utilities.MapDevJobsAtDtosToJobs(dtos);
-            await data.InsertJobs(jobs);
-        }
-        catch (Exception ex)
-        {
-            Log.Error(ex, "Unable to Insert {@dtos} into database", dtos);
-            return Results.Problem(ex.Message, null, 500);
-        }
-
-        return Results.Ok();
-    }
-
-    internal static async Task<IResult> JobsAtWebHook(List<JobsAtDto> dtos, IJobData data)
-    {
-        if (dtos.Count == 0)
-        {
-            Log.Information("Received invalid arguments in JobsAtWebHook.");
-
-            return Results.BadRequest("Invalid Arguments given.");
-        }
-
-        Log.Information("Receiving Web Scraping data from jobs.at {@dtos}", dtos);
-        try
-        {
-            List<JobModel> jobs = Utilities.Utilities.MapJobsAtDtosToJobs(dtos);
             await data.InsertJobs(jobs);
         }
         catch (Exception ex)

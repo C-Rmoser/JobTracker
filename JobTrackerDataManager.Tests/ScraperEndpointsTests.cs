@@ -44,20 +44,6 @@ public class ScraperEndpointsTests
     }
 
     [Fact]
-    public async void JobsAtWebHook_ReturnsOk_WhenArgumentIsValid()
-    {
-        // Arrange
-        var dtos = Utilities.GetJobsAtDtos();
-        _data.InsertJobs(Arg.Any<List<JobModel>>()).Returns(1);
-
-        // Act
-        var result = await ScraperEndpoints.JobsAtWebHook(dtos, _data);
-
-        // Assert
-        result.GetOkObjectResultStatusCode().Should().Be(200);
-    }
-
-    [Fact]
     public async void KarriereAtWebHook_ReturnsBadRequest_WhenArgumentIsNotValid()
     {
         // Arrange
@@ -80,20 +66,6 @@ public class ScraperEndpointsTests
 
         // Act
         var result = await ScraperEndpoints.DevJobsAtWebHook(dtos, _data);
-
-        // Assert
-        result.GetOkObjectResultStatusCode().Should().Be(400);
-    }
-
-    [Fact]
-    public async void JobsAtWebHook_ReturnsBadRequest_WhenArgumentIsNotValid()
-    {
-        // Arrange
-        var dtos = new List<JobsAtDto>();
-        _data.InsertJobs(Arg.Any<List<JobModel>>()).Returns(0);
-
-        // Act
-        var result = await ScraperEndpoints.JobsAtWebHook(dtos, _data);
 
         // Assert
         result.GetOkObjectResultStatusCode().Should().Be(400);
@@ -123,21 +95,6 @@ public class ScraperEndpointsTests
 
         // Act
         var result = await ScraperEndpoints.DevJobsAtWebHook(dtos, _data);
-
-        // Assert
-        var value = result.GetProblemObject();
-        value.Status.Should().Be(500);
-    }
-
-    [Fact]
-    public async void JobsAtWebHook_ReturnsInternalServerError_WhenDatabaseInsertionFails()
-    {
-        // Arrange
-        var dtos = Utilities.GetJobsAtDtos();
-        _data.InsertJobs(Arg.Any<List<JobModel>>()).Throws(new ApplicationException());
-
-        // Act
-        var result = await ScraperEndpoints.JobsAtWebHook(dtos, _data);
 
         // Assert
         var value = result.GetProblemObject();

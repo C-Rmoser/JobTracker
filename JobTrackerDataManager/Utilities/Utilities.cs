@@ -63,27 +63,4 @@ public static class Utilities
 
         return jobs;
     }
-
-    public static List<JobModel> MapJobsAtDtosToJobs(List<JobsAtDto> dtos)
-    {
-        List<JobModel> jobs = new();
-
-        foreach (var dto in dtos)
-        {
-            JobModel job = new()
-            {
-                Title = dto.title,
-                Location = dto.location,
-                Company = dto.company,
-                LinkToDetails = dto.title_link,
-                Origin = "jobs.at",
-                FirstSeenOn = DateTimeOffset.FromUnixTimeMilliseconds(dto.timestamp).DateTime,
-                IsArchived = false
-            };
-
-            jobs.Add(job);
-        }
-
-        return jobs;
-    }
 }

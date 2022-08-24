@@ -34,19 +34,6 @@ public class UtilitiesTests
     }
 
     [Fact]
-    public static void MapJobsAtDtosToJobs_ShouldReturnJobs_WhenArgumentIsValid()
-    {
-        // Arrange
-        var dtos = Utilities.GetJobsAtDtos();
-
-        // Act
-        var result = JobTrackerDataManager.Utilities.Utilities.MapJobsAtDtosToJobs(dtos);
-
-        // Assert
-        result.Count.Should().Be(dtos.Count);
-    }
-
-    [Fact]
     public static void MapKarriereAtDtosToJobs_ShouldReturnEmptyList_WhenArgumentIsEmpty()
     {
         // Arrange
@@ -67,19 +54,6 @@ public class UtilitiesTests
 
         // Act
         var result = JobTrackerDataManager.Utilities.Utilities.MapDevJobsAtDtosToJobs(dtos);
-
-        // Assert
-        result.Count.Should().Be(dtos.Count);
-    }
-
-    [Fact]
-    public static void MapJobsAtDtosToJobs_ShouldReturnEmptyList_WhenArgumentIsEmpty()
-    {
-        // Arrange
-        var dtos = new List<JobsAtDto>();
-
-        // Act
-        var result = JobTrackerDataManager.Utilities.Utilities.MapJobsAtDtosToJobs(dtos);
 
         // Assert
         result.Count.Should().Be(dtos.Count);
