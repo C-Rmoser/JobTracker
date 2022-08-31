@@ -9,9 +9,8 @@ public static class UserEndpoints
 {
     public static void ConfigureUserEndpoints(this WebApplication app)
     {
-        // TODO: Remove AllowAnonymous() at some point
         app.MapPost("/user/register", RegisterUser)
-            .Accepts<UserRegistrationModel>("application/json").AllowAnonymous();
+            .Accepts<UserRegistrationModel>("application/json");
     }
 
     internal static async Task<IResult> RegisterUser(UserRegistrationModel user,
